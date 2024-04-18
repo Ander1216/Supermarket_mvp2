@@ -15,7 +15,7 @@ namespace Supermarket_mvp.Presenter
         private BindingSource payModeBindingSource;
         private IEnumerable<PayModeModel> payModeList;
 
-        public PayModePresenter(IPayModeRepository repository)
+        public PayModePresenter(IPayModeView view, IPayModeRepository repository)
         {
             this.payModeBindingSource = new BindingSource();
 
