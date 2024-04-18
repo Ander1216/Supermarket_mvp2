@@ -72,7 +72,7 @@ namespace Supermarket_mvp._Repositories
                      command.CommandText = @"SELECT * FROM PayMode
                                         WHERE Pay_Mode_Id=@id or Pay_Mode_Name LIKE @name+ '%'
                                         ORDER By Pay_Mode_Id DESC";
-                      command.Parameters.Add("@id", SqlDbType.Int).Value = payModeId;
+                command.Parameters.Add("@id", SqlDbType.Int).Value = payModeId;
                 command.Parameters.Add("@name", SqlDbType.NVarChar).Value = payModeName;
                 using (var reader = command.ExecuteReader())
                 {

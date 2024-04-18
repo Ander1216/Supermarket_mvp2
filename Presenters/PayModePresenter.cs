@@ -14,6 +14,7 @@ namespace Supermarket_mvp.Presenter
         private IPayModeRepository repository;
         private BindingSource payModeBindingSource;
         private IEnumerable<PayModeModel> payModeList;
+        private IpayModeRespository respository;
 
         public PayModePresenter(IPayModeView view, IPayModeRepository repository)
         {
@@ -34,6 +35,12 @@ namespace Supermarket_mvp.Presenter
             loadAllPayModeList();
 
             this.view.Show();
+        }
+
+        public PayModePresenter(IPayModeView view, IpayModeRespository respository)
+        {
+            this.view = view;
+            this.respository = respository;
         }
 
         private void loadAllPayModeList()

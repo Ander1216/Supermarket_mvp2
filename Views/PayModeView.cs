@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Microsoft.Data.SqlClient;
+using Supermarket_mvp._Repositories;
+using Supermarket_mvp.Presenter;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -82,6 +85,33 @@ namespace Supermarket_mvp.Views
         {
             DgPayMode.DataSource = PayModeList;
         }
+
+        private static PayModeView instance;
+        
+            public static PayModeView GetInstance()
+            {
+                if (instance == null || instance.IsDisposed)
+                {
+                 instance = new PayModeView();
+                }
+                else
+                {
+                    if(instance.WindowState == FormWindowState.Minimized)
+                {
+                    instance.WindowState = FormWindowState.Normal;
+                }
+                instance.BringToFront();
+                }
+            return instance;
+            }
+
+        private void ShowPayModeView(object? sender, EventArgs e)
+        {
+            IPayModeView view = PayModeView.GetInstance();
+            IpayModeRespository respository = new PayModeRepository(SqlConnectionString);
+            new PayModePresenter(view, respository);
+        }
+        
 
         private void label2_Click(object sender, EventArgs e)
         {
