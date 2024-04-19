@@ -73,7 +73,7 @@
             ClientSize = new Size(800, 450);
             Controls.Add(panel1);
             Name = "MainView";
-            Text = "Text a Supermarket";
+            Text = "Text a SupermarketSupermarket";
             WindowState = FormWindowState.Maximized;
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();

@@ -10,14 +10,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace Supermarket_mvp.Views
 {
     public partial class PayModeView : Form, IPayModeView
     {
-        private string message;
         private string isEdit;
         private string isSuccessful;
+        private string message;
 
         public PayModeView()
         {
@@ -25,6 +26,8 @@ namespace Supermarket_mvp.Views
             AssociateAndRaiseViewEvents();
 
             tabControl1.TabPages.Remove(tabPagePayModeDetail);
+
+            BtnClose.Click += delegate { this.Close(); };
         }
 
         private void AssociateAndRaiseViewEvents()
@@ -40,37 +43,37 @@ namespace Supermarket_mvp.Views
             };
         }
 
-        public string PayModeId 
-        { 
+        public string PayModeId
+        {
             get { return TxtPayModeId.Text; }
-            set { TxtPayModeId.Text = value; } 
+            set { TxtPayModeId.Text = value; }
         }
-        public string PayModeName 
-        { 
+        public string PayModeName
+        {
             get { return TxtPayModeName.Text; }
             set { TxtPayModeName.Text = value; }
         }
-        public string PayModeObservation 
-        { 
+        public string PayModeObservation
+        {
             get { return TxtPayModeObservation.Text; }
             set { TxtPayModeObservation.Text = value; }
         }
-        public string SearchValue 
-        { 
-            get { return TxtSearch.Text; } 
+        public string SearchValue
+        {
+            get { return TxtSearch.Text; }
             set { TxtSearch.Text = value; }
         }
-        public string IsEdit 
+        public string IsEdit
         {
             get { return isEdit; }
             set { isEdit = value; }
         }
-        public string IsSuccessful 
+        public string IsSuccessful
         {
             get { return isSuccessful; }
             set { isSuccessful = value; }
         }
-        public string Message 
+        public string Message
         {
             get { return message; }
             set { message = value; }
@@ -89,35 +92,31 @@ namespace Supermarket_mvp.Views
         }
 
         private static PayModeView instance;
-        
-            public static PayModeView GetInstance()
+
+        public static PayModeView GetInstance(Form parentContainer)
+        {
+            if (instance == null || instance.IsDisposed)
             {
-                if (instance == null || instance.IsDisposed)
-                {
-                 instance = new PayModeView();
-                }
-                else
-                {
-                    if(instance.WindowState == FormWindowState.Minimized)
+                instance = new PayModeView();
+                instance.MdiParent = parentContainer;
+
+                instance.FormBorderStyle = FormBorderStyle.None;
+                instance.Dock = DockStyle.Fill;
+            }
+            else
+            {
+                if (instance.WindowState == FormWindowState.Minimized)
                 {
                     instance.WindowState = FormWindowState.Normal;
                 }
                 instance.BringToFront();
-                }
-            return instance;
             }
-
-        private void ShowPayModeView(object? sender, EventArgs e)
-        {
-            IPayModeView view = PayModeView.GetInstance();
-            IpayModeRespository respository = new PayModeRepository(SqlConnectionString);
-            new PayModePresenter(view, respository);
+            return instance;
         }
-        
-
+    
         private void label2_Click(object sender, EventArgs e)
         {
-
+        
         }
     }
 }
