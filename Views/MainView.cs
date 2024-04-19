@@ -63,7 +63,7 @@ namespace Supermarket_mvp.Views
 
         private void BtnPayMode_Click(object sender, EventArgs e)
         {
-            BtnPayMode.Click += delegate { ShowPayModeView?.Invoke(this, EventArgs.Empty); };
+            
         }
     }
 }
