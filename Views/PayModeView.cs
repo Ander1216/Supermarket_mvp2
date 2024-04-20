@@ -134,9 +134,9 @@ namespace Supermarket_mvp.Views
         public event EventHandler SaveEvent;
         public event EventHandler CancelEvent;
 
-        public void SetPayModeListBildingSource(BindingSource PayModeList)
+        public void SetPayModeListBildingSource(BindingSource payModeList)
         {
-            DgPayMode.DataSource = PayModeList;
+            DgPayMode.DataSource = payModeList;
         }
 
         private static PayModeView instance;

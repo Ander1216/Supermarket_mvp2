@@ -32,10 +32,8 @@
             BtnExit = new Button();
             pictureBox1 = new PictureBox();
             BtnPayMode = new Button();
-            dataGridView1 = new DataGridView();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -81,32 +79,17 @@
             BtnPayMode.UseVisualStyleBackColor = true;
             BtnPayMode.Click += BtnPayMode_Click;
             // 
-            // dataGridView1
-            // 
-            dataGridView1.AllowUserToAddRows = false;
-            dataGridView1.AllowUserToDeleteRows = false;
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(206, 3);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.ReadOnly = true;
-            dataGridView1.Size = new Size(768, 507);
-            dataGridView1.TabIndex = 1;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
-            // 
             // MainView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(968, 510);
-            Controls.Add(dataGridView1);
             Controls.Add(panel1);
             Name = "MainView";
             Text = "Text a SupermarketSupermarket";
             WindowState = FormWindowState.Maximized;
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
         }
 
@@ -116,6 +99,5 @@
         private PictureBox pictureBox1;
         private Button BtnPayMode;
         private Button BtnExit;
-        private DataGridView dataGridView1;
     }
 }

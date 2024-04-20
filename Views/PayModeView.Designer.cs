@@ -116,7 +116,6 @@
             tabPagePayModeList.Size = new Size(792, 322);
             tabPagePayModeList.TabIndex = 0;
             tabPagePayModeList.Text = "Pay Mode List";
-            tabPagePayModeList.UseVisualStyleBackColor = true;
             // 
             // BtnClose
             // 
@@ -153,12 +152,14 @@
             DgPayMode.AllowUserToAddRows = false;
             DgPayMode.AllowUserToDeleteRows = false;
             DgPayMode.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            DgPayMode.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             DgPayMode.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DgPayMode.Location = new Point(23, 86);
             DgPayMode.Name = "DgPayMode";
             DgPayMode.ReadOnly = true;
             DgPayMode.Size = new Size(548, 228);
             DgPayMode.TabIndex = 4;
+            DgPayMode.VirtualMode = true;
             // 
             // BtnNew
             // 

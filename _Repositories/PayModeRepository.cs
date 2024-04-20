@@ -83,15 +83,15 @@ namespace Supermarket_mvp._Repositories
 
         public IEnumerable<PayModeModel> GetByValue(string value)
         {
-            var payModeList = new List <PayModeModel>();
+            var payModeList = new List<PayModeModel>();
             int payModeId = int.TryParse(value, out _) ? Convert.ToInt32(value) : 0;
             string payModeName = value;
             using (var connection = new SqlConnection(connectionString))
-                using (var command = new SqlCommand())
-                {
-                     connection.Open();
-                     command.Connection = connection;
-                     command.CommandText = @"SELECT * FROM PayMode
+            using (var command = new SqlCommand())
+            {
+                  connection.Open();
+                  command.Connection = connection;
+                  command.CommandText = @"SELECT * FROM PayMode
                                         WHERE Pay_Mode_Id=@id or Pay_Mode_Name LIKE @name+ '%'
                                         ORDER By Pay_Mode_Id DESC";
                 command.Parameters.Add("@id", SqlDbType.Int).Value = payModeId;

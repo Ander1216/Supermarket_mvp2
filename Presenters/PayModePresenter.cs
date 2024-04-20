@@ -58,38 +58,16 @@ namespace Supermarket_mvp.Presenter
         {
             // Secrea un objecto de la clase PayModeModel y se Asignano los datos
             // De las Caja de texto de la vista
-
-            var payMode = new PayModeModel();
-            payMode.Id = Convert.ToInt32(view.PayModeId);
-            payMode.Name = view.PayModeName;
-            payMode.Observation = view.PayModeObservation;
-
-            try
+            bool emptyValue = string.IsNullOrWhiteSpace(this.view.SearchValue);
+            if (emptyValue == false) 
             {
-                new Common.ModelDataValidation().Validate(payMode);
-                if (view.IsEdit)
-                {
-                    repository.Edit(payMode);
-                    view.Message = "PayMode edited successfuly";
-                }
-                else
-                {
-
-                    repository.Add(payMode);
-                    view.Message = "PayMode added successfuly";
-                }
-                view.IsSuccessful = false;
-                loadAllPayModeList();
-                CleanViewFields();
+                payModeList = repository.GetByValue(this.view.SearchValue);
             }
-            catch (Exception ex)
+            else
             {
-                // Si ocurre una excepcion se configura IsSuccesful en false
-                // y al la propiedad message de la vista se asigna el mensaje de la exception
-
-                view.IsSuccessful = false;
-                view.Message = ex.Message;
+                payModeList = repository.GetAll();
             }
+            payModeBindingSource.DataSource = payModeList;
         }
 
         private void CleanViewFields()
