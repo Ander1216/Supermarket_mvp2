@@ -51,25 +51,44 @@ namespace Supermarket_mvp.Presenter
 
         private void CancelAction(object? sender, EventArgs e)
         {
-           CleanViewFields();
+            CleanViewFields();
         }
 
         private void SavePayMode(object? sender, EventArgs e)
         {
             // Secrea un objecto de la clase PayModeModel y se Asignano los datos
             // De las Caja de texto de la vista
-            bool emptyValue = string.IsNullOrWhiteSpace(this.view.SearchValue);
-            if (emptyValue == false) 
-            {
-                payModeList = repository.GetByValue(this.view.SearchValue);
-            }
-            else
-            {
-                payModeList = repository.GetAll();
-            }
-            payModeBindingSource.DataSource = payModeList;
-        }
+            var payMode = new PayModeModel();
+            payMode.Id = Convert.ToInt32(view.PayModeId);
+            payMode.Name = view.PayModeName;
+            payMode.Observation = view.PayModeObservation;
 
+            try
+            {
+                new Common.ModelDataValidation().Validate(payMode);
+                if (view.IsEdit)
+                {
+                    repository.Edit(payMode);
+                    view.Message = "PayMode edited successfuly";
+                }
+                else
+                {
+                    repository.Add(payMode);
+                    view.Message = "PayMode added successfuly";
+                }
+                view.IsSuccessful = true;
+                loadAllPayModeList();
+                CleanViewFields();     
+            }
+
+            catch (Exception ex)
+            {
+                // Si ocurre una excepcion se configura IsSuccesfull en false
+                // y a la propiedad message de la vista se asigna el mensaje de la exception
+                view.IsSuccessful = false;
+                view.Message = ex.Message;
+            }
+        }
         private void CleanViewFields()
         {
             view.PayModeId = "0";
@@ -85,23 +104,22 @@ namespace Supermarket_mvp.Presenter
         private void LoadSelectPayModeToEdit(object? sender, EventArgs e)
         {
             // Se obtiene el objeto deldatagridview que se encuentra selecionado
-            var payMode = (PayModeModel)payModeBindingSource.Current;
+            var payMode = (PayModeModel) payModeBindingSource.Current;
 
             // Se cambia el contenido de las cajas de texto por el objeto recuperado
             // del datagridview
-
             view.PayModeId = payMode.Id.ToString();
             view.PayModeName = payMode.Name;
             view.PayModeObservation = payMode.Observation;
 
             // se establece el modo como edicion
-            view.IsEdit  = true.ToString();
+            view.IsEdit  = true;
             
         }
 
         private void AddNewPayMode(object? sender, EventArgs e)
         {
-            view.IsEdit = false.ToString();
+            view.IsEdit = false;
         }
 
         private void SearchPayMode(object? sender, EventArgs e)
