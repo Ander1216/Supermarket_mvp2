@@ -67,7 +67,14 @@ namespace Supermarket_mvp.Views
             //BtnPayMode.Click += delegate { ShowPayModeView?.Invoke(this, EventArgs.Empty); };
             PayModeView payModeView = new PayModeView();
             payModeView.Show();
-            
+
+            BtnExit.Click += delegate { this.Close(); };
+
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
 
         }
     }
