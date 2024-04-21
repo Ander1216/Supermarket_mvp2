@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Supermarket_mvp.Presenters.Common
 {
     internal class ModelDataValidation
